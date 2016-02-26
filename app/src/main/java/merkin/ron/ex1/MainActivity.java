@@ -16,8 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText amount;
     private TextView tip;
     private CheckBox checkBox;
-    //regex that checks that the input is valid 
-    private final static String validInput = "^[0-9]*$";
+  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,17 +28,22 @@ public class MainActivity extends AppCompatActivity {
         calcTip.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                double afterCalc;
                 // if the entered amount is valid
-                if(amount.getText().toString().trim().matches(validInput)){
-                    double afterCalc = Double.valueOf(amount.getText().toString()) * 0.12;
-                    // if we want to round the result
-                    if(checkBox.isChecked()){
+                try{
+                    afterCalc = Double.valueOf(amount.getText().toString()) * 0.12;
+                }catch (Exception e){
+
+                    amount.setError("Invalid Input");
+                    return;
+                }
+                // if we want to round the result
+                if(checkBox.isChecked()){
                         afterCalc = Math.ceil(afterCalc);
                     }
-                    tip.setText(String.valueOf("Tip: " + afterCalc));
-                }else{
-                    amount.setError("Invalid Input");
-                }
+                tip.setText(String.valueOf("Tip: " + afterCalc));
+
+
 
             }
         });
