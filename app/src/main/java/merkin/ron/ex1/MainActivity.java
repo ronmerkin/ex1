@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText amount;
     private TextView tip;
     private CheckBox checkBox;
-  
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
